@@ -3,6 +3,7 @@ package com.yzy;
 
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -10,6 +11,27 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 
 public class FileNioTest {
+
+
+    @Test
+    public void channelTest() throws IOException {
+        RandomAccessFile file=new RandomAccessFile("D:\\study\\nio\\src\\main\\java\\com\\yzy\\test.txt","rw");
+        RandomAccessFile file2=new RandomAccessFile("D:\\study\\nio\\src\\main\\java\\com\\yzy\\test3.txt","rw");
+        FileChannel channel = file.getChannel();
+        FileChannel channel2 = file2.getChannel();
+        System.out.println(file.length());
+        System.out.println(channel.size());
+//        channel2.transferFrom(channel,0,file.length());
+        channel.transferTo(0,file.length(),channel2);
+    }
+
+
+    @Test
+    public void fileApiTest() throws IOException {
+        RandomAccessFile file=new RandomAccessFile("D:\\study\\nio\\src\\main\\java\\com\\yzy\\test.txt","rw");
+        FileChannel channel = file.getChannel();
+        FileChannel truncate = channel.truncate(1024); //截取1024
+    }
 
     @Test
     public void fileWriteTest() throws IOException{
