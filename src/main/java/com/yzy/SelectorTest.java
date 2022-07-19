@@ -120,7 +120,6 @@ public class SelectorTest {
                             buffer.clear();
                         }else if (l==-1){
                             channel.close();
-
                         }
 //                        channel.register(selector,SelectionKey.OP_WRITE);
                     }else if (key.isWritable()){
